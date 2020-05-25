@@ -14,7 +14,9 @@ class App {
         this.app = express();
         //Mount routes 
         this.app.use('/', cors(), eventRoutes.routes);
-
+        this.app.get('/test', (req : any, res : any)=>{
+            res.send("Hello you")
+        })
         //Setup change detection for the indeividual client
         this.app.get("/stream", (req : any, res : any) => { 
             res.setHeader('Cache-Control', 'no-cache');
