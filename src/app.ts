@@ -1,5 +1,4 @@
 import express = require('express');
-const path = require('path');
 import cors from 'cors';
 import { DB } from './dbs';
 import eventRoutes from './api/event/event.routes';
@@ -7,16 +6,20 @@ import eventRoutes from './api/event/event.routes';
 class App {
 
     public app : any;
+    
     private db = new DB();
 
     constructor() {
         //This app is an Express app.
         this.app = express();
+
         //Mount routes 
         this.app.use('/', cors(), eventRoutes.routes);
+
         this.app.get('/test', (req : any, res : any)=>{
-            res.send("Hello you")
+            res.send("Hello you, how are you")
         })
+
         //Setup change detection for the indeividual client
         this.app.get("/stream", (req : any, res : any) => { 
             res.setHeader('Cache-Control', 'no-cache');
